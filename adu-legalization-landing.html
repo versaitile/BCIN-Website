@@ -3,12 +3,803 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nataliya Hordiyuk — BCIN Designer, Basement Legalization, GTA</title>
+<title>Nataliya Hordiyuk — BCIN Designer, ADU &amp; Basement Legalization, GTA</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#141414;
+    --graphite:#4A4A4A;
+    --slate:#8A8A8A;
+    --hair:#E2E2E0;
+    --hair-light: rgba(255,255,255,0.18);
+    --panel:#F2F1EE;
+    --paper:#FFFFFF;
+    --clay:#7A9E20;
+
+    --s1:0.5rem; --s2:1rem; --s3:1.5rem; --s4:2.5rem; --s5:4rem; --s6:6.5rem;
+    --r-pill:0; --r-card:0;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Inter',sans-serif;
+    background:var(--paper);
+    color:var(--ink);
+    font-size:1.0625rem;
+    font-weight:300;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+    padding-bottom:64px;
+  }
+  img,svg{display:block;}
+  a{color:inherit;text-decoration:none;}
+  ul{list-style:none;}
+  p{color:var(--slate);}
+
+  .wrap{max-width:1180px;margin:0 auto;padding:0 var(--s3);}
+
+  .eyebrow{
+    font-size:0.7rem;font-weight:500;text-transform:uppercase;letter-spacing:0.3em;
+    color:var(--graphite);display:inline-flex;align-items:center;gap:0.5em;
+  }
+  .on-dark .eyebrow{color:var(--graphite);}
+
+  h1,h2,h3{font-family:'Archivo',sans-serif;letter-spacing:-0.02em;line-height:1.04;color:var(--ink);}
+  h1{font-weight:700;}
+  h2{font-size:clamp(2rem,4vw,3rem);font-weight:700;letter-spacing:-0.02em;}
+  h3{font-size:1.6rem;font-weight:600;letter-spacing:-0.01em;}
+
+  .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease, transform .7s ease;}
+  .reveal.in{opacity:1;transform:translateY(0);}
+
+  /* ---------- nav ---------- */
+  .nav{position:sticky;top:0;z-index:50;background:var(--paper);border-bottom:1px solid var(--hair);}
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;padding:1.05rem var(--s3);max-width:1180px;margin:0 auto;}
+  .brand{display:flex;align-items:center;gap:12px;}
+  .brand .b-logo{width:30px;height:30px;flex:none;color:var(--ink);}
+  .brand .b-text{font-family:'Archivo',sans-serif;display:flex;flex-direction:column;gap:3px;line-height:1;}
+  .brand .b-name{font-weight:800;font-size:1.02rem;letter-spacing:-0.02em;}
+  .brand .b-cred{font-family:'Inter',sans-serif;font-weight:500;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--graphite);}
+  .nav-links{display:flex;align-items:center;gap:var(--s4);}
+  .nav-links a{font-size:0.88rem;font-weight:500;color:var(--ink);opacity:0.72;transition:opacity .2s ease;}
+  .nav-links a:hover{opacity:1;}
+  .nav-cta-area{display:flex;align-items:center;gap:var(--s3);}
+
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:0.5em;
+    border-radius:var(--r-pill);font-family:'Inter',sans-serif;font-weight:600;font-size:0.85rem;
+    text-transform:uppercase;letter-spacing:0.08em;padding:0.9rem 1.7rem;
+    border:1px solid transparent;cursor:pointer;position:relative;overflow:hidden;
+    transition:transform .25s ease, background .25s ease, border-color .25s ease, color .25s ease;
+    white-space:nowrap;
+  }
+  .btn:hover{transform:translateY(-2px);}
+  .btn-primary{background:var(--clay);color:var(--paper);border-color:var(--clay);}
+  .btn-primary:hover{background:#235f5f;border-color:#235f5f;}
+  .btn-outline{background:transparent;border-color:var(--ink);color:var(--ink);}
+  .btn-outline:hover{background:var(--ink);color:var(--paper);}
+  .btn-outline.on-dark{border-color:var(--paper);color:var(--paper);}
+  .btn-outline.on-dark:hover{background:var(--paper);color:var(--ink);}
+  .btn-clay{background:var(--clay);color:var(--paper);border-color:var(--clay);}
+  .btn-clay:hover{background:#5c7718;border-color:#5c7718;}
+  .btn-dark{background:var(--ink);color:var(--paper);border-color:var(--ink);}
+  .btn-dark:hover{background:var(--graphite);border-color:var(--graphite);}
+  .btn-sm{padding:0.65rem 1.3rem;font-size:0.78rem;}
+  .btn:focus-visible{outline:2px solid var(--ink);outline-offset:2px;}
+
+  .btn-primary::after{
+    content:'';position:absolute;top:0;left:-60%;width:35%;height:100%;
+    background:linear-gradient(115deg, transparent, rgba(255,255,255,0.3), transparent);
+    transform:skewX(-18deg);transition:left .65s ease;pointer-events:none;
+  }
+  .btn-primary:hover::after{left:130%;}
+  .btn-primary::before{
+    content:'';position:absolute;top:-3px;right:-3px;width:9px;height:9px;
+    background:radial-gradient(circle, var(--paper) 0%, transparent 72%);
+    opacity:0;transform:scale(0.3);transition:opacity .3s ease, transform .3s ease;pointer-events:none;
+  }
+  .btn-primary:hover::before{opacity:1;transform:scale(1);}
+
+  @keyframes pulse-scale{0%,100%{transform:scale(1);}50%{transform:scale(1.05);}}
+  .nav-cta-area .btn-primary{animation:pulse-scale 2.8s ease-in-out infinite;}
+
+  .scroll-progress{position:fixed;top:0;left:0;width:100%;height:2px;z-index:60;pointer-events:none;}
+  .scroll-progress-bar{height:100%;width:100%;background:var(--ink);transform:scaleX(0);transform-origin:0 0;}
+
+  /* ---------- hero ---------- */
+  .hero{position:relative;overflow:hidden;background:#F4F3F0;color:var(--ink);padding:var(--s5) var(--s3) calc(var(--s6) + 1rem);}
+  .hero-blueprint{
+    position:absolute;inset:-25%;z-index:0;pointer-events:none;
+    background-image:url(assets/floor-plan.jpg);
+    background-size:320px auto;
+    background-repeat:repeat;
+    transform:rotate(-12deg);
+    mix-blend-mode:multiply;
+    opacity:0.07;
+  }
+
+  .hero-inner{position:relative;z-index:1;max-width:1180px;margin:0 auto;}
+  .hero-top{display:grid;grid-template-columns:1.15fr 0.85fr;gap:var(--s5);align-items:center;}
+  .hero-copy{max-width:620px;}
+  .hero h1{font-family:'Archivo',sans-serif;font-size:clamp(3rem,7.2vw,5.2rem);font-weight:800;letter-spacing:-0.025em;line-height:0.94;margin-top:var(--s2);color:var(--ink);}
+
+  .swash-word{position:relative;display:inline-block;}
+  .swash-word svg{position:absolute;left:2%;bottom:-0.16em;width:96%;height:0.34em;overflow:visible;pointer-events:none;}
+  .swash-word svg path{
+    fill:none;stroke:var(--clay);stroke-width:5;stroke-linecap:round;
+    stroke-dasharray:340;stroke-dashoffset:340;
+    animation:draw-swash 0.9s 0.7s cubic-bezier(.3,.8,.4,1) forwards;
+  }
+  @keyframes draw-swash{to{stroke-dashoffset:0;}}
+  @media(prefers-reduced-motion:reduce){.swash-word svg path{animation:none;stroke-dashoffset:0;}}
+
+  .hero-lead{font-size:1.2rem;color:var(--graphite);max-width:54ch;margin-top:var(--s3);font-weight:300;}
+  .hero-actions{display:flex;flex-wrap:wrap;align-items:center;gap:var(--s3);margin-top:var(--s4);}
+  .hero-fineprint{font-size:0.85rem;color:var(--slate);margin-top:var(--s3);}
+
+  .hero-media{position:relative;}
+  .hero-photo-frame{
+    position:relative;border-radius:var(--r-card);overflow:hidden;aspect-ratio:4/5;
+    border:1px solid var(--hair);
+    background:linear-gradient(150deg, var(--panel) 0%, var(--hair) 100%);
+  }
+  .hero-photo-frame img{position:absolute;inset:0;width:100%;height:112%;object-fit:cover;display:block;will-change:transform;}
+  .hero-booking-card{
+    position:absolute;left:-1rem;bottom:-1.3rem;max-width:230px;
+    background:var(--paper);border-radius:var(--r-card);padding:var(--s3);
+    border:1px solid var(--ink);color:var(--ink);
+  }
+  .hero-booking-card .bk-label{font-size:0.68rem;font-weight:500;text-transform:uppercase;letter-spacing:0.16em;color:var(--graphite);}
+  .hero-booking-card .bk-title{font-family:'Archivo',sans-serif;font-weight:700;font-size:1.05rem;margin-top:0.35em;line-height:1.2;}
+  .hero-booking-card .btn{margin-top:0.8em;width:100%;}
+
+  .glass-card{
+    margin-top:var(--s5);background:var(--paper);border:1px solid var(--hair);border-radius:var(--r-card);
+    padding:var(--s4);display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s3);
+  }
+  .stat{padding:0 var(--s2);border-left:1px solid var(--hair);}
+  .stat:first-child{border-left:none;padding-left:0;}
+  .stat .num{font-family:'Archivo',sans-serif;font-weight:800;font-size:clamp(1.8rem,3vw,2.6rem);letter-spacing:-0.02em;color:var(--ink);display:flex;align-items:center;gap:.3em;}
+  .stat .num svg{color:var(--ink);}
+  .stat .label{font-size:0.85rem;color:var(--slate);margin-top:0.3em;}
+
+  /* ---------- sections ---------- */
+  section{padding:var(--s6) 0;}
+  .section-head{max-width:680px;margin-bottom:var(--s5);display:flex;align-items:flex-end;gap:var(--s3);}
+  .section-head h2{margin-top:var(--s2);}
+  .section-head .section-num{
+    font-family:'Archivo',sans-serif;font-weight:800;font-size:clamp(4rem,12vw,11rem);line-height:0.78;
+    letter-spacing:-0.045em;color:var(--ink);flex:none;
+  }
+  .section-head .section-copy{display:flex;flex-direction:column;}
+  .hr{border-top:1px solid var(--hair);}
+
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s4);}
+  .step{position:relative;padding:var(--s4) var(--s3) var(--s3);border:1px solid var(--hair);border-radius:var(--r-card);transition:transform .3s ease, border-color .3s ease;background:var(--paper);}
+  .step:hover{transform:translateY(-6px);border-color:var(--ink);}
+  .step-num{
+    font-family:'Playfair Display',serif;font-style:italic;font-weight:400;font-size:1rem;
+    width:2.4rem;height:2.4rem;border-radius:50%;display:flex;align-items:center;justify-content:center;
+    border:1px solid var(--ink);color:var(--ink);margin-bottom:var(--s3);
+  }
+  .step-icon{margin-bottom:var(--s2);color:var(--ink);display:inline-flex;animation:bob 3.2s ease-in-out infinite;}
+  .step:nth-child(2) .step-icon{animation-delay:-1s;}
+  .step:nth-child(3) .step-icon{animation-delay:-2s;}
+  @keyframes bob{0%,100%{transform:translateY(0);}50%{transform:translateY(-6px);}}
+  .step h3{margin-top:0.6em;}
+  .step p{margin-top:0.6em;color:var(--slate);font-size:0.98rem;}
+
+  .pricing{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s4);align-items:stretch;}
+  .tier{border:1px solid var(--hair);border-radius:var(--r-card);padding:var(--s4) var(--s3);display:flex;flex-direction:column;background:var(--paper);transition:transform .3s ease, border-color .3s ease;}
+  .tier:hover{transform:translateY(-6px);}
+  .tier.featured{position:relative;background:var(--ink);color:var(--paper);border:2px solid var(--ink);transform:translateY(-10px);}
+  .tier.featured:hover{transform:translateY(-14px);}
+  .breathe-glow{position:absolute;inset:-1px;border:1px solid var(--paper);opacity:0;pointer-events:none;animation:breathe 5s ease-in-out infinite;}
+  @keyframes breathe{0%,50.01%,100%{opacity:0;}25%{opacity:0.45;}}
+  .tier-tag{font-size:0.7rem;font-weight:500;text-transform:uppercase;letter-spacing:0.2em;color:var(--graphite);}
+  .tier.featured .tier-tag{color:rgba(255,255,255,0.6);}
+  .tier-name{font-family:'Archivo',sans-serif;font-size:1.35rem;font-weight:700;margin-top:0.6em;}
+  .tier-price{font-family:'Archivo',sans-serif;font-size:1.5rem;font-weight:800;letter-spacing:-0.02em;margin-top:0.5em;}
+  .tier-desc{margin-top:0.7em;font-size:0.95rem;color:var(--slate);}
+  .tier.featured .tier-desc{color:rgba(255,255,255,0.65);}
+  .tier-features{margin-top:var(--s3);flex:1;display:flex;flex-direction:column;gap:0.7em;}
+  .tier-features li{display:flex;align-items:flex-start;gap:0.6em;font-size:0.92rem;}
+  .tier-features svg{flex:none;margin-top:0.2em;color:var(--ink);}
+  .tier.featured .tier-features svg{color:var(--paper);}
+  .tier-features svg path{stroke-dasharray:20;stroke-dashoffset:20;transition:stroke-dashoffset .5s ease;}
+  .reveal.in .tier-features li:nth-child(1) svg path{transition-delay:.15s;}
+  .reveal.in .tier-features li:nth-child(2) svg path{transition-delay:.3s;}
+  .reveal.in .tier-features li:nth-child(3) svg path{transition-delay:.45s;}
+  .reveal.in .tier-features li:nth-child(4) svg path{transition-delay:.6s;}
+  .reveal.in .tier-features svg path{stroke-dashoffset:0;}
+  .tier .btn{margin-top:var(--s4);width:100%;}
+
+  .case-studies{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    grid-template-rows:auto auto auto auto;
+    gap:0 var(--s4);
+  }
+  .case-card{
+    display:grid;
+    grid-row:span 4;
+    grid-template-rows:subgrid;
+    border:1px solid var(--hair);
+    border-radius:var(--r-card);
+    padding:var(--s4) var(--s3);
+    background:var(--paper);
+  }
+  .case-tag{font-size:0.68rem;font-weight:600;text-transform:uppercase;letter-spacing:0.18em;color:var(--paper);background:var(--ink);display:inline-block;padding:0.2em 0.6em;align-self:start;}
+  .case-row{display:flex;gap:0.75em;padding:var(--s2) 0;border-top:1px solid var(--hair);}
+  .case-row:first-of-type{border-top:1px solid var(--hair);margin-top:var(--s2);}
+  .case-label{font-size:0.7rem;font-weight:600;text-transform:uppercase;letter-spacing:0.14em;color:var(--graphite);width:5.8rem;min-width:5.8rem;padding-top:0.15em;flex:none;}
+  .case-text{font-size:0.95rem;color:var(--slate);line-height:1.55;}
+  .case-outcome .case-label{color:var(--clay);}
+  .case-outcome .case-text{color:var(--ink);font-weight:500;}
+  @supports not (grid-template-rows:subgrid){
+    .case-card{display:flex;flex-direction:column;}
+  }
+
+  .contact-section{background:var(--ink);color:var(--paper);}
+  .contact-grid{display:grid;grid-template-columns:0.9fr 1.1fr;gap:var(--s5);align-items:flex-start;}
+  .contact-info p{color:rgba(255,255,255,0.65);margin-top:var(--s3);max-width:42ch;}
+  .info-row{display:flex;align-items:center;gap:0.7em;margin-top:var(--s3);font-size:0.95rem;}
+  .info-row svg{color:var(--paper);flex:none;}
+
+  form{display:flex;flex-direction:column;gap:var(--s3);}
+  .field-row{display:grid;grid-template-columns:1fr 1fr;gap:var(--s3);}
+  label{font-size:0.75rem;font-weight:500;text-transform:uppercase;letter-spacing:0.12em;color:rgba(255,255,255,0.5);margin-bottom:0.5em;display:block;}
+  input,select,textarea{
+    width:100%;background:transparent;border:1px solid rgba(255,255,255,0.25);border-radius:0;color:var(--paper);
+    padding:0.85rem 1rem;font-family:'Inter',sans-serif;font-size:0.98rem;transition:border-color .2s ease, background .2s ease;
+  }
+  input::placeholder,textarea::placeholder{color:rgba(255,255,255,0.35);}
+  input:focus,select:focus,textarea:focus{outline:none;border-color:var(--paper);background:rgba(255,255,255,0.05);}
+  select option{color:var(--ink);}
+  textarea{resize:vertical;min-height:110px;}
+  .form-actions{display:flex;align-items:center;gap:var(--s3);margin-top:var(--s1);}
+  .form-fineprint{font-size:0.82rem;color:rgba(255,255,255,0.45);}
+
+  .offer-band{background:var(--ink);color:var(--paper);padding:var(--s4) 0;border-top:1px solid var(--hair-light);border-bottom:1px solid var(--hair-light);}
+  .offer-inner{display:flex;align-items:center;justify-content:space-between;gap:var(--s3);flex-wrap:wrap;}
+  .offer-copy .offer-text{font-family:'Archivo',sans-serif;font-weight:800;font-size:1.35rem;letter-spacing:-0.015em;}
+  .offer-copy .offer-sub{font-size:0.92rem;color:rgba(255,255,255,0.55);margin-top:0.25em;}
+
+  .guarantee{background:var(--panel);}
+  .guarantee-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s4);margin-top:var(--s4);}
+  .guarantee-item{display:flex;flex-direction:column;gap:0.5em;}
+  .guarantee-item .g-icon{
+    width:2.6rem;height:2.6rem;border-radius:50%;display:flex;align-items:center;justify-content:center;
+    border:1px solid var(--ink);color:var(--ink);margin-bottom:0.4em;
+  }
+  .guarantee-item h3{font-size:1.15rem;}
+  .guarantee-item p{font-size:0.95rem;color:var(--slate);}
+
+  .faq-list{display:flex;flex-direction:column;border-top:1px solid var(--hair);}
+  .faq-item{border-bottom:1px solid var(--hair);}
+  .faq-q{
+    width:100%;text-align:left;background:none;border:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;
+    padding:var(--s3) 0;font-size:1.05rem;font-weight:600;color:var(--ink);gap:var(--s3);font-family:'Archivo',sans-serif;
+  }
+  .faq-q svg{flex:none;transition:transform .25s ease;color:var(--ink);}
+  .faq-item[open] .faq-q svg{transform:rotate(45deg);}
+  .faq-a{padding:0 0 var(--s3);color:var(--slate);max-width:68ch;font-size:0.98rem;}
+
+  .sticky-book-bar{
+    position:fixed;left:0;right:0;bottom:0;z-index:55;background:var(--ink);color:var(--paper);
+    border-top:1px solid var(--hair-light);padding:0.85rem var(--s3);
+    display:flex;align-items:center;justify-content:space-between;gap:var(--s3);
+    transform:translateY(0);opacity:1;transition:transform .35s ease, opacity .35s ease;
+  }
+  .sticky-book-bar.is-hidden{transform:translateY(110%);opacity:0;}
+  .sticky-book-bar .urgency{display:flex;align-items:center;gap:0.6em;font-size:0.92rem;}
+  .sticky-book-bar .urgency .dot{width:7px;height:7px;border-radius:50%;background:var(--paper);flex:none;animation:pulse-dot 1.6s ease-in-out infinite;}
+  @keyframes pulse-dot{0%,100%{opacity:1;transform:scale(1);}50%{opacity:0.35;transform:scale(0.65);}}
+  .sticky-book-bar .bar-actions{display:flex;align-items:center;gap:var(--s2);}
+  .sticky-bar-close{background:none;border:none;color:rgba(255,255,255,0.5);cursor:pointer;font-size:1.1rem;line-height:1;padding:0.3rem;}
+  .sticky-bar-close:hover{color:var(--paper);}
+
+  .nudge{
+    position:fixed;right:var(--s3);bottom:84px;z-index:56;max-width:270px;
+    background:var(--ink);color:var(--paper);border-radius:var(--r-card);border:1px solid var(--hair-light);padding:var(--s3);
+    transform:translateX(120%);opacity:0;transition:transform .5s ease, opacity .5s ease;
+  }
+  .nudge.show{transform:translateX(0);opacity:1;}
+  .nudge-close{position:absolute;top:0.5rem;right:0.6rem;background:none;border:none;color:rgba(255,255,255,0.55);cursor:pointer;font-size:1rem;line-height:1;padding:0.2rem;}
+  .nudge-close:hover{color:var(--paper);}
+  .nudge .nudge-title{font-family:'Archivo',sans-serif;font-weight:700;font-size:1rem;padding-right:1.2rem;}
+  .nudge p{font-size:0.88rem;color:rgba(255,255,255,0.65);margin-top:0.4em;}
+  .nudge .btn{margin-top:0.7em;width:100%;}
+
+  footer{padding:var(--s4) 0 var(--s5);}
+  .footer-inner{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:var(--s2);padding-top:var(--s4);border-top:1px solid var(--hair);}
+  .footer-inner span{font-size:0.85rem;color:var(--slate);}
+
+  @media (max-width:900px){
+    .nav-links{display:none;}
+    .steps,.pricing,.testimonials,.guarantee-grid{grid-template-columns:1fr;}
+    .tier.featured{transform:none;}
+    .hero-top{grid-template-columns:1fr;}
+    .hero-media{margin-top:var(--s4);max-width:320px;}
+    .hero-booking-card{left:0.6rem;bottom:-1rem;max-width:200px;}
+    .glass-card{grid-template-columns:1fr;}
+    .stat{border-left:none;padding-left:0;border-top:1px solid var(--hair-light);padding-top:var(--s2);}
+    .stat:first-child{border-top:none;padding-top:0;}
+    .contact-grid{grid-template-columns:1fr;}
+    .field-row{grid-template-columns:1fr;}
+    .offer-inner{justify-content:flex-start;}
+    .nudge{max-width:88vw;right:var(--s2);}
+    .section-head{flex-direction:column;align-items:flex-start;gap:0.3rem;}
+    .section-head .section-num{font-size:2.4rem;}
+  }
+
+  @media (max-width:480px){
+    .sticky-book-bar .urgency span.urgency-text{display:none;}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .blob{animation:none;}
+    .reveal{transition:none;opacity:1;transform:none;}
+    .step-icon,.breathe-glow,.sticky-book-bar .urgency .dot,.nav-cta-area .btn-primary{animation:none;}
+    .tier-features svg path{transition:none;stroke-dashoffset:0;}
+    html{scroll-behavior:auto;}
+  }
+</style>
 </head>
 <body>
-<p>Site loading...</p>
+
+<div class="scroll-progress"><div class="scroll-progress-bar" id="scrollProgressBar"></div></div>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="#top">
+      <img class="b-logo" src="assets/logo.svg" alt="" aria-hidden="true">
+      <span class="b-text">
+        <span class="b-name">Nataliya Hordiyuk</span>
+        <span class="b-cred">BCIN Designer · House · BCIN #125615</span>
+      </span>
+    </a>
+    <div class="nav-links">
+      <a href="#process">How It Works</a>
+      <a href="#pricing">Services</a>
+      <a href="#faq">FAQ</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="nav-cta-area">
+      <a href="#contact" class="btn btn-primary btn-sm">Book Now</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="hero-blueprint"></div>
+  <div class="hero-inner">
+    <div class="hero-top">
+      <div class="hero-copy reveal in">
+        <span class="eyebrow on-dark">Building Permit Application &amp; Legal Basement Permit · Greater Toronto Area</span>
+        <h1>Permit-ready drawings that get <b class="swash-word">approved<svg viewBox="0 0 220 24" preserveAspectRatio="none" aria-hidden="true"><path d="M3 16c20-9 40-13 60-10 18 2.5 24 11 42 9 19-2 26-13 48-12 20 1 28 11 47 9 14-1.5 12-7 17-9"/></svg></b>, not <em style="font-family:'Playfair Display',serif;font-style:italic;font-weight:400;">bounced back.</em></h1>
+        <p class="hero-lead">I work with the Building Department until your project has received its permits and is ready for the construction stage.</p>
+        <div class="hero-actions">
+          <a href="#contact" class="btn btn-clay">Book your free feasibility call</a>
+          <a href="#process" class="btn btn-dark">See how it works</a>
+        </div>
+        <p class="hero-fineprint">No obligation. I tell you what's possible before you spend a dollar.</p>
+      </div>
+
+      <div class="hero-media reveal in">
+        <div class="hero-photo-frame">
+          <img id="heroPhoto" src="assets/hero-house.jpg" alt="Modern house exterior with a legal basement suite, Greater Toronto Area" loading="eager">
+        </div>
+        <div class="hero-booking-card">
+          <span class="bk-label">Free · 20 min</span>
+          <div class="bk-title">Book your feasibility call</div>
+          <a href="#contact" class="btn btn-primary btn-sm">Book now</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="steps reveal in" style="margin-top:var(--s5);">
+      <div class="step">
+        <div class="step-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </div>
+        <h3>Drawings Package</h3>
+        <p>Preparation of complete drawings package and coordination with structural, electrical, and mechanical engineers.</p>
+      </div>
+      <div class="step">
+        <div class="step-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="12" cy="9.5" r="2.3" stroke="currentColor" stroke-width="1.8"/></svg>
+        </div>
+        <h3>Service Area</h3>
+        <p>Toronto · Mississauga · Brampton · Vaughan · Markham · Richmond Hill · Oakville · Milton · Burlington · St. Catharines · Niagara Falls · Hamilton · Ancaster · Stoney Creek and more.</p>
+      </div>
+      <div class="step">
+        <div class="step-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M22 6l-10 7L2 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><rect x="2" y="4" width="20" height="16" rx="2" stroke="currentColor" stroke-width="1.8"/></svg>
+        </div>
+        <h3>City Correspondence</h3>
+        <p>Filing, coordinating, and handling all correspondence with the city — on your behalf.</p>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="process">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="section-num">01</span>
+      <div class="section-copy">
+        <span class="eyebrow">How It Works</span>
+        <h2>Three steps. Zero City Hall trips for you.</h2>
+      </div>
+    </div>
+
+    <div class="steps">
+      <div class="step reveal">
+        <div class="step-icon">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none"><path d="M4 4h16v16H4V4z" stroke="currentColor" stroke-width="1.8"/><path d="M8 9h8M8 13h8M8 17h5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </div>
+        <div class="step-num">01</div>
+        <h3>Free feasibility call</h3>
+        <p>Send me your address and a few photos. I'll tell you straight — legalize as-is, what needs to change, or whether rebuilding makes more sense. No sales pitch, just the numbers.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-icon">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none"><path d="M5 21V8l7-5 7 5v13" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M9 21v-7h6v7" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="step-num">02</div>
+        <h3>Permit-ready drawings &amp; code fixes</h3>
+        <p>As a BCIN Designer, I prepare a complete, detailed drawings package fully compliant with the Ontario Building Code — accurate, professionally produced, and coordinated with structural, electrical, and mechanical engineers so the city gets everything it needs the first time.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-icon">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="step-num">03</div>
+        <h3>Permit issued</h3>
+        <p>You receive a signed, legal building permit — the city's official approval that your project meets the Ontario Building Code. Whether it's a basement suite, an addition, or a renovation, you now have the authorization to build with confidence and full legal standing.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="pricing" class="hr">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="section-num">02</span>
+      <div class="section-copy">
+        <span class="eyebrow">Services</span>
+        <h2>Pick where you're starting from.</h2>
+      </div>
+    </div>
+
+    <div class="pricing">
+      <div class="tier reveal">
+        <span class="tier-tag">Feasibility</span>
+        <div class="tier-name">Feasibility Review</div>
+        <div class="tier-price">Custom Quote</div>
+        <p class="tier-desc">For homeowners who just got a notice or are weighing legalize-vs-rebuild and need a straight answer first.</p>
+        <ul class="tier-features">
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>On-site or video assessment</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Zoning &amp; code compliance check</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Written legalize-vs-rebuild cost breakdown</li>
+        </ul>
+        <a href="#contact" class="btn btn-outline">Start here</a>
+      </div>
+
+      <div class="tier featured reveal">
+        <div class="breathe-glow"></div>
+        <span class="tier-tag">Most chosen</span>
+        <div class="tier-name">Full Permit Package</div>
+        <div class="tier-price">Custom Quote</div>
+        <p class="tier-desc">Start to finish: drawings, applications, and every examiner round, handled until the permit is in your hand.</p>
+        <ul class="tier-features">
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Stamped BCIN permit drawings</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Full city application submission</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Every examiner comment answered for you</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Fire separation &amp; egress sign-off included</li>
+        </ul>
+        <a href="#contact" class="btn btn-primary">Book this</a>
+      </div>
+
+      <div class="tier reveal">
+        <span class="tier-tag">Rescue</span>
+        <div class="tier-name">Stuck Application Rescue</div>
+        <div class="tier-price">Custom Quote</div>
+        <p class="tier-desc">For applications already submitted and stalled on examiner comments you can't decode. I pick it up where it stopped.</p>
+        <ul class="tier-features">
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Examiner comment translation &amp; response</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Revised drawings, resubmitted fast</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Direct line back to the examiner's office</li>
+        </ul>
+        <a href="#contact" class="btn btn-outline">Get unstuck</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section id="faq" class="hr">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="section-num">04</span>
+      <div class="section-copy">
+        <span class="eyebrow">FAQ</span>
+        <h2>Questions homeowners ask first.</h2>
+      </div>
+    </div>
+    <div class="faq-list reveal">
+      <details class="faq-item">
+        <summary class="faq-q">What if my basement can't be legalized at all?<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></summary>
+        <p class="faq-a">Most can, with specific fixes — ceiling height, egress windows, fire separation. On the rare file where it genuinely can't, I tell you on the free call, before any paid work, and walk you through what rebuilding or other options would cost instead.</p>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">How much does this actually cost?<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></summary>
+        <p class="faq-a">It depends on your scope — existing layout, what the city is asking for, and whether this is a fresh application or a rescue. You'll get an exact number in writing after the free feasibility call, no surprise add-ons.</p>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">How long will this take from here to a stamped permit?<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></summary>
+        <p class="faq-a">Drawings typically take 2–4 weeks once I've assessed your space. City review timelines vary by municipality, but well-prepared files average far fewer examiner rounds than DIY submissions — which is where most of the delay usually comes from.</p>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">The city already rejected my application — can you fix it?<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></summary>
+        <p class="faq-a">Yes — this is the Stuck Application Rescue service. Send me the examiner's comments and I'll tell you exactly what's missing, then produce revised drawings that answer every point in one resubmission instead of three.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<div class="offer-band">
+  <div class="wrap offer-inner">
+    <div class="offer-copy reveal">
+      <div class="offer-text">$100 off your first drawing package</div>
+      <div class="offer-sub">Book a quote call this week and the credit is applied automatically — no code needed.</div>
+    </div>
+    <a href="#contact" class="btn btn-primary">Claim my $100 off</a>
+  </div>
+</div>
+
+<section id="reviews" class="hr">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="section-num">05</span>
+      <div class="section-copy">
+        <span class="eyebrow">Case Studies</span>
+        <h2>Real projects. Real permits.</h2>
+      </div>
+    </div>
+
+    <div class="case-studies">
+      <div class="case-card reveal">
+        <span class="case-tag">Order to Comply</span>
+        <div class="case-row">
+          <span class="case-label">Situation</span>
+          <span class="case-text">Homeowner received a city notice on a basement unit that had been renting for several years. Replace this with your real project summary.</span>
+        </div>
+        <div class="case-row">
+          <span class="case-label">Solution</span>
+          <span class="case-text">Assessed the unit against current OBC requirements, identified the non-compliant items, and prepared a full drawings package addressing every point. Replace with your real scope.</span>
+        </div>
+        <div class="case-outcome case-row">
+          <span class="case-label">Outcome</span>
+          <span class="case-text">Building permit issued. Replace with your real result.</span>
+        </div>
+      </div>
+
+      <div class="case-card reveal">
+        <span class="case-tag">Stuck Application</span>
+        <div class="case-row">
+          <span class="case-label">Situation</span>
+          <span class="case-text">Application had been submitted and rejected twice. Examiner comments covered fire separation and egress — owner couldn't decode what was actually needed. Replace with your real project summary.</span>
+        </div>
+        <div class="case-row">
+          <span class="case-label">Solution</span>
+          <span class="case-text">Reviewed the examiner's comments, identified the two missing details, and resubmitted with revised drawings that answered every point. Replace with your real scope.</span>
+        </div>
+        <div class="case-outcome case-row">
+          <span class="case-label">Outcome</span>
+          <span class="case-text">Approved on first resubmission. Replace with your real result.</span>
+        </div>
+      </div>
+
+      <div class="case-card reveal">
+        <span class="case-tag">New Basement Suite</span>
+        <div class="case-row">
+          <span class="case-label">Situation</span>
+          <span class="case-text">Owner wanted to add a legal second unit to an existing house and had no idea where to start with zoning or the permit process. Replace with your real project summary.</span>
+        </div>
+        <div class="case-row">
+          <span class="case-label">Solution</span>
+          <span class="case-text">Conducted a feasibility review, confirmed zoning compliance, prepared complete permit drawings, and coordinated with the Building Department through to approval. Replace with your real scope.</span>
+        </div>
+        <div class="case-outcome case-row">
+          <span class="case-label">Outcome</span>
+          <span class="case-text">Permit issued. Owner never visited City Hall once. Replace with your real result.</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="contact" class="contact-section">
+  <div class="wrap">
+    <div class="contact-grid">
+      <div class="contact-info reveal">
+        <span class="eyebrow on-dark">Contact</span>
+        <h2>Tell me what's going on. I'll tell you what's possible.</h2>
+        <p>No pressure, no sales script — just a straight answer on what your basement needs to get legal, and what it'll cost in time and money.</p>
+        <div class="info-row">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M22 6l-10 7L2 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><rect x="2" y="4" width="20" height="16" rx="2" stroke="currentColor" stroke-width="1.8"/></svg>
+          nataliya.hordiyuk@gmail.com
+        </div>
+        <div class="info-row">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.89.32 1.76.6 2.6a2 2 0 0 1-.45 2.11L8.09 9.6a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.84.28 1.71.48 2.6.6A2 2 0 0 1 22 16.92z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+          (647) 701-0464
+        </div>
+        <div class="info-row">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="12" cy="9.5" r="2.3" stroke="currentColor" stroke-width="1.8"/></svg>
+          Serving all of the GTA and more
+        </div>
+      </div>
+
+      <form action="#" method="post" class="reveal">
+        <div class="field-row">
+          <div>
+            <label for="name">Full name</label>
+            <input id="name" name="name" type="text" placeholder="Jane Smith" required>
+          </div>
+          <div>
+            <label for="phone">Phone</label>
+            <input id="phone" name="phone" type="tel" placeholder="(416) 555-0100" required>
+          </div>
+        </div>
+        <div>
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" placeholder="jane@email.com" required>
+        </div>
+        <div>
+          <label for="situation">What's going on?</label>
+          <select id="situation" name="situation">
+            <option>I got a notice or order to comply</option>
+            <option>My application is stuck with the city</option>
+            <option>I'm exploring legalizing my basement</option>
+            <option>I'm a referral partner (broker, agent, contractor)</option>
+          </select>
+        </div>
+        <div>
+          <label for="message">A few details</label>
+          <textarea id="message" name="message" placeholder="City, basement layout, what the city has told you so far..."></textarea>
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary">Book my free call</button>
+          <span class="form-fineprint">I reply within one business day.</span>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-inner">
+      <span>© 2026 Nataliya Hordiyuk — Legal Basement Permit · Greater Toronto Area and more.</span>
+      <span>BCIN Designer · House · 125615</span>
+    </div>
+  </div>
+</footer>
+
+<div class="sticky-book-bar" id="stickyBar">
+<div class="bar-actions">
+    <a href="#contact" class="btn btn-primary btn-sm">Book Now</a>
+    <button type="button" class="sticky-bar-close" id="stickyBarClose" aria-label="Dismiss">&times;</button>
+  </div>
+</div>
+
+<div class="nudge" id="nudge">
+  <button type="button" class="nudge-close" id="nudgeClose" aria-label="Dismiss">&times;</button>
+  <div class="nudge-title">Still thinking it over?</div>
+  <p>Book a free call this week and get $100 off your first drawing package.</p>
+  <a href="#contact" class="btn btn-primary btn-sm">Claim $100 off</a>
+</div>
+
+<script>
+  (function(){
+    var items = document.querySelectorAll('.reveal');
+    if(!('IntersectionObserver' in window)){
+      items.forEach(function(el){ el.classList.add('in'); });
+      return;
+    }
+    var obs = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          entry.target.classList.add('in');
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+    items.forEach(function(el){ obs.observe(el); });
+  })();
+
+  /* scroll progress bar + gentle hero image parallax */
+  (function(){
+    var bar = document.getElementById('scrollProgressBar');
+    var heroPhoto = document.getElementById('heroPhoto');
+    var heroEl = document.querySelector('.hero');
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var ticking = false;
+
+    function update(){
+      var doc = document.documentElement;
+      var scrollTop = window.scrollY || doc.scrollTop;
+      var max = doc.scrollHeight - doc.clientHeight;
+      var progress = max > 0 ? scrollTop / max : 0;
+      if(bar) bar.style.transform = 'scaleX(' + progress + ')';
+
+      if(heroPhoto && heroEl && !reduce){
+        var heroHeight = heroEl.offsetHeight;
+        if(scrollTop < heroHeight){
+          var shift = scrollTop * 0.08;
+          heroPhoto.style.transform = 'translateY(' + shift + 'px)';
+        }
+      }
+      ticking = false;
+    }
+    window.addEventListener('scroll', function(){
+      if(!ticking){
+        requestAnimationFrame(update);
+        ticking = true;
+      }
+    }, { passive: true });
+    update();
+  })();
+
+  /* sticky bar dismiss */
+  (function(){
+    var bar = document.getElementById('stickyBar');
+    var closeBtn = document.getElementById('stickyBarClose');
+    if(!bar || !closeBtn) return;
+    closeBtn.addEventListener('click', function(){
+      bar.classList.add('is-hidden');
+      document.body.style.paddingBottom = '0';
+    });
+  })();
+
+  /* one-time slide-in nudge, shown once after scrolling past services/pricing */
+  (function(){
+    var nudge = document.getElementById('nudge');
+    var closeBtn = document.getElementById('nudgeClose');
+    var pricingEl = document.getElementById('pricing');
+    if(!nudge || !pricingEl) return;
+
+    var dismissed = false;
+    try{ dismissed = sessionStorage.getItem('nudgeDismissed') === '1'; }catch(e){}
+    if(dismissed) return;
+
+    var shown = false;
+    var obs = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(!entry.isIntersecting && entry.boundingClientRect.top < 0 && !shown){
+          shown = true;
+          nudge.classList.add('show');
+          obs.disconnect();
+        }
+      });
+    }, { threshold: 0 });
+    obs.observe(pricingEl);
+
+    if(closeBtn){
+      closeBtn.addEventListener('click', function(){
+        nudge.classList.remove('show');
+        try{ sessionStorage.setItem('nudgeDismissed', '1'); }catch(e){}
+      });
+    }
+  })();
+</script>
+
 </body>
 </html>
