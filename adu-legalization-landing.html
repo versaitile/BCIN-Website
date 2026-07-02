@@ -323,21 +323,37 @@
     .steps,.pricing,.testimonials,.guarantee-grid{grid-template-columns:1fr;}
     .tier.featured{transform:none;}
     .hero-top{grid-template-columns:1fr;}
-    .hero-media{margin-top:var(--s4);max-width:320px;}
-    .hero-booking-card{left:0.6rem;bottom:-1rem;max-width:200px;}
+    .hero-media{margin-top:var(--s5);max-width:100%;}
+    .hero-booking-card{display:none;}
     .glass-card{grid-template-columns:1fr;}
     .stat{border-left:none;padding-left:0;border-top:1px solid var(--hair-light);padding-top:var(--s2);}
     .stat:first-child{border-top:none;padding-top:0;}
     .contact-grid{grid-template-columns:1fr;}
     .field-row{grid-template-columns:1fr;}
-    .offer-inner{justify-content:flex-start;}
+    .offer-inner{flex-direction:column;align-items:flex-start;}
     .nudge{max-width:88vw;right:var(--s2);}
     .section-head{flex-direction:column;align-items:flex-start;gap:0.3rem;}
     .section-head .section-num{font-size:2.4rem;}
+    .case-studies{grid-template-columns:1fr;grid-template-rows:none;}
+    .case-card{grid-row:span 1;grid-template-rows:none;display:flex;flex-direction:column;}
+    section{padding:var(--s4) 0;}
+    .hero{padding:var(--s4) var(--s3) var(--s5);}
   }
 
   @media (max-width:480px){
-    .sticky-book-bar .urgency span.urgency-text{display:none;}
+    .hero h1{font-size:2.2rem;line-height:1.0;}
+    .hero-lead{font-size:1rem;}
+    .hero-actions{flex-direction:column;align-items:stretch;}
+    .hero-actions .btn{text-align:center;justify-content:center;}
+    .btn{padding:0.85rem 1.2rem;}
+    h2{font-size:1.7rem;}
+    h3{font-size:1.3rem;}
+    .tier-name{font-size:1.1rem;}
+    .offer-copy .offer-text{font-size:1.1rem;}
+    .faq-q{font-size:0.95rem;}
+    .sticky-book-bar{padding:0.7rem var(--s2);}
+    .nav-inner{padding:0.85rem var(--s2);}
+    .wrap{padding:0 var(--s2);}
   }
 
   @media (prefers-reduced-motion: reduce){
